@@ -1,0 +1,15 @@
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/regex-3d2fd5ac4a1de839.rmeta: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/builders.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/error.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/find_byte.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/string.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/string.rs
+
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/regex-3d2fd5ac4a1de839.d: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/builders.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/error.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/find_byte.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/string.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/string.rs
+
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/lib.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/builders.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/bytes.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/error.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/find_byte.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/mod.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/bytes.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regex/string.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/mod.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/bytes.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/regex-1.9.5/src/regexset/string.rs:

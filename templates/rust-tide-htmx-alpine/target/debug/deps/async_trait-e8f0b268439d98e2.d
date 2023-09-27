@@ -1,0 +1,12 @@
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/libasync_trait-e8f0b268439d98e2.so: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/args.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/bound.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/expand.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/lifetime.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/parse.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/receiver.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/verbatim.rs
+
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/async_trait-e8f0b268439d98e2.d: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/args.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/bound.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/expand.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/lifetime.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/parse.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/receiver.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/verbatim.rs
+
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/lib.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/args.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/bound.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/expand.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/lifetime.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/parse.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/receiver.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/async-trait-0.1.73/src/verbatim.rs:

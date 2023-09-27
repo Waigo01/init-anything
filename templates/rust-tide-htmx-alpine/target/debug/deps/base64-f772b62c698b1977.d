@@ -1,0 +1,14 @@
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/base64-f772b62c698b1977.rmeta: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/chunked_encoder.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/display.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/decoder.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/tables.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/encoder.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/encode.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/decode.rs
+
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/base64-f772b62c698b1977.d: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/chunked_encoder.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/display.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/decoder.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/tables.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/encoder.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/encode.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/decode.rs
+
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/lib.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/chunked_encoder.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/display.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/mod.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/decoder.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/tables.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/mod.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/encoder.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/encode.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/decode.rs:

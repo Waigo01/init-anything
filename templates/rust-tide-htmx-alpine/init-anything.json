@@ -1,0 +1,13 @@
+{
+  "name": "Rust - Tide - HTMX - Alpine",
+  "runCommands": [
+    {
+      "name": "dev",
+      "vars": [{"name": "port0", "default": "3017"}, {"name": "port1", "default": "3018"}],
+      "commands": ["live-server --port=$port0 --watch=./,../static --mount=/static:./static --proxy=/api/:http://127.0.0.1:$port1/api/ ./pages", "cargo watch --ignore \"static\" --ignore \"pages\" -x run%20$port1"]
+    }
+  ],
+  "initCommands": ["cargo init", "git init", "sudo npm install -g live-server"],
+  "forceInitVerbose": true,
+  "addDeps": [{"command": "cargo add", "deps": ["serde --features=derive", "tide", "serde_json", "async-std --features=attributes", "lazy_static", "tera"]}]
+}

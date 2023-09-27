@@ -1,0 +1,16 @@
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/bstr-640ef026991c6bbb.rmeta: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ascii.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/bstr.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/bstring.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/byteset/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/byteset/scalar.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/escape_bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ext_slice.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ext_vec.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/impls.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/io.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/utf8.rs
+
+/home/janfe/.scripts/hrt-init/rust-tide-htmx-alpine/target/debug/deps/bstr-640ef026991c6bbb.d: /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/lib.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ascii.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/bstr.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/bstring.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/byteset/mod.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/byteset/scalar.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/escape_bytes.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ext_slice.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ext_vec.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/impls.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/io.rs /home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/utf8.rs
+
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/lib.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ascii.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/bstr.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/bstring.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/byteset/mod.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/byteset/scalar.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/escape_bytes.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ext_slice.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/ext_vec.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/impls.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/io.rs:
+/home/janfe/.cargo/registry/src/github.com-1ecc6299db9ec823/bstr-1.6.2/src/utf8.rs:
