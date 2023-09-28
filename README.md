@@ -36,13 +36,15 @@ Flags:
   ("runCommands"): [
     {
       "name": "",
-      ("vars"): [{"name": "", ("default"): ""}],
-      "commands": [""]
+      ("runAsync"): true | false,
+      "commands": [{"name": "", ("execDir"): ""}]
     }
   ],
   ("initCommands"): [""],
   ("forceInitVerbose"): true,
-  ("addDeps"): [{"command": "", "deps": [""]}]
+  ("addDeps"): [{"command": "", "deps": [""]}],
+  ("vars"): [{"name": "", ("default"): ""}],
+  ("varFiles"): [""]
 }
 ```
 
@@ -69,20 +71,49 @@ Here is the second example template which initializes a simple environment for d
   "runCommands": [
     {
       "name": "dev",
-      "vars": [{"name": "port0", "default": "3017"}, {"name": "port1", "default": "3018"}],
-      "commands": ["live-server --port=$port0 --watch=./,../static --mount=/static:./static --proxy=/api/:http://127.0.0.1:$port1/api/ ./pages", "cargo watch --ignore \"static\" --ignore \"pages\" -x run%20$port1"]
+      "runAsync": true,
+      "commands": [{"command": "live-server --port=$port0 --watch=./,../static --mount=/static:./static --proxy=/api/:http://127.0.0.1:$port1/api/ ./pages"}, {"command": "cargo watch --ignore \"static\" --ignore \"pages\" -x run%20$port1"}]
     }
   ],
   "initCommands": ["cargo init", "git init", "sudo npm install -g live-server"],
   "forceInitVerbose": true,
-  "addDeps": [{"command": "cargo add", "deps": ["serde --features=derive", "tide", "serde_json", "async-std --features=attributes", "lazy_static", "tera"]  }]
+  "addDeps": [{"command": "cargo add", "deps": ["serde --features=derive", "tide", "serde_json", "async-std --features=attributes", "lazy_static", "tera"]}],
+  "vars": [{"name": "port0", "default": "3017"}, {"name": "port1", "default": "3018"}]
 }
 ```
 
-You can again see the "name" and "initCommands" fields but there are also a lot more fields. The "addDeps" field is a field with which you can specify what dependencies to add and how you would like to add them. You can also see the "forceInitVerbose" field. This field will force the use of the "-v"-flag when initializing a project when set to true. Finally, there is the "runCommands" field. This field specifies any commands you would like to run with one simple usage of the command init-anything. Each command in the list must have a name, it can have variables which can be referenced in the commands themselvs with $var and it must of course have at least one command to execute.
+You can again see the "name" and "initCommands" fields but there are also a lot more fields. The "addDeps" field is a field with which you can specify what dependencies to add and how you would like to add them. You can also see the "forceInitVerbose" field. This field will force the use of the "-v"-flag when initializing a project when set to true. Also, there is the "runCommands" field. This field specifies any commands you would like to run with one simple usage of the command init-anything. Each command in the list must have a command assigned to it. The filed "runAsync" is also optional and will run the commands in order but asynchronously. The "vars" field contains variables that can be set using the flag --<variable>=<value> when executing the run or init command. It can be referenced using the $variable shorthand in any init or run command.
 
 The command "dev" can be run like this:
 
 ```
 init-anything run dev --port0=8080 --port1=8081
+
+```
+
+Finally, you can find one last config looking like this:
+
+```json
+{
+  "name": "Cmake",
+  "runCommands": [
+    {"name": "start", "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]}
+  ],
+  "varFiles": ["./CMakeLists.txt"],
+  "vars": [{"name": "projectName", "default": "HelloWorld"}]
+}
+```
+
+This config initializes a simple Cmake prject. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. The rest of the config should look familiar.
+
+The project can be initialized using the following command, when not using the default project name:
+
+```
+init-anything init --projectName=Example
+```
+
+The command "start" can be run like this:
+
+```
+init-anything run start --projectName=Example
 ```
