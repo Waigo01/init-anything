@@ -62,3 +62,23 @@ impl From<serde_json::Error> for RunError {
         }
     } 
 }
+
+pub struct ReplaceError {
+    pub message: String,
+}
+
+impl From<io::Error> for ReplaceError {
+    fn from(error: io::Error) -> Self {
+        ReplaceError {
+            message: error.to_string()
+        }
+    } 
+}
+
+impl From<serde_json::Error> for ReplaceError {
+    fn from(error: serde_json::Error) -> Self {
+        ReplaceError {
+            message: error.to_string()
+        }
+    }
+}

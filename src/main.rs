@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
 use core::fmt;
 use std::{fs, env::{self}, path::{PathBuf, Path}, process::{Command, Stdio}, io::Error};
+use errors::{RunError, ReplaceError};
 use init::initTemplate;
 use inquire::Select;
 use run::runCmd;
@@ -20,7 +21,6 @@ pub struct Var {
 #[derive(Serialize, Deserialize)]
 pub struct RunCommand {
     pub name: String,
-    pub vars: Option<Vec<Var>>,
     pub commands: Vec<String>,
 }
 
@@ -36,6 +36,8 @@ pub struct Config {
     pub runCommands: Option<Vec<RunCommand>>,
     pub initCommands: Option<Vec<String>>,
     pub addDeps: Option<Vec<DependencyAdd>>,
+    pub vars: Option<Vec<Var>>,
+    pub varFiles: Option<Vec<String>>,
     pub forceInitVerbose: Option<bool>,
 }
 
@@ -92,6 +94,27 @@ pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<
     Ok(())
 }
 
+pub fn replaceVars(replaceString: String, vars: &Vec<Var>, ownFlags: &Vec<String>) -> Result<String, ReplaceError> {
+    let mut builtReplaceString = replaceString;
+    for i in vars {
+        let mut found = false;
+        for j in ownFlags {
+            if i.name == j.trim_matches('-').split("=").collect::<Vec<&str>>()[0] {
+                builtReplaceString = builtReplaceString.replace(&("$".to_string() + &i.name), j.split("=").collect::<Vec<&str>>()[1]);
+                found = true;
+                break;
+            }
+        }
+        if !found && i.default.is_some() {
+            builtReplaceString = builtReplaceString.replace(&("$".to_string() + &i.name), &i.default.as_ref().unwrap());
+        } else if !found && i.default.is_none() {
+            return Err(ReplaceError { message: format!("Could not find variable {} and no default was given!", i.name) });
+        }
+    }
+
+    Ok(builtReplaceString)
+}
+
 fn passFlags(totalArgs: Vec<String>) -> (Vec<String>, Vec<String>) {
     let mut flags: Vec<String> = vec![];
     let mut args: Vec<String> = vec![];
@@ -134,7 +157,7 @@ fn main() {
         if fs::read_dir("./").unwrap().map(|x| x.unwrap().path()).collect::<Vec<PathBuf>>().contains(&Path::new("./").join("init-anything.json")) {
             let config: Config = match serde_json::from_str(&fs::read_to_string("./init-anything.json").unwrap()) { Ok(s) => s, Err(e) => { println!("\x1b[1;31mAn error occured while passing the json: {}\x1b[0m", e); return;}};
             match runCmd(config, flags, args) {
-                Ok(_) => println!("\x1b[1;32mRunning Command\x1b[0m"),
+                Ok(_) => print!(""),
                 Err(e) => { println!("{}", e.message); return;},
             }
         }else{

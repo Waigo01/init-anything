@@ -1,0 +1,9 @@
+{
+  "name": "hello",
+  "runCommands": [
+    {
+      "name": "start",
+      "commands": ["echo helloWorld"]
+    }
+  ]
+}
