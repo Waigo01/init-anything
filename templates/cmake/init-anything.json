@@ -1,0 +1,8 @@
+{
+  "name": "cmake",
+  "runCommands": [
+    {"name": "start", "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]}
+  ],
+  "varFiles": ["./CMakeLists.txt"],
+  "vars": [{"name": "projectName", "default": "HelloWorld"}]
+}

@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use core::fmt;
 use std::{fs, env::{self}, path::{PathBuf, Path}, process::{Command, Stdio}, io::Error};
-use errors::{RunError, ReplaceError};
+use errors::ReplaceError;
 use init::initTemplate;
 use inquire::Select;
 use run::runCmd;
@@ -19,9 +19,15 @@ pub struct Var {
 }
 
 #[derive(Serialize, Deserialize)]
+pub struct CommandString {
+    pub command: String,
+    pub execDir: Option<String>
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct RunCommand {
     pub name: String,
-    pub commands: Vec<String>,
+    pub commands: Vec<CommandString>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -74,7 +80,11 @@ pub fn getCommandArgs(command: &str) -> Vec<String> {
     command.split(" ").map(|x| x.to_string()).map(|x| x.replace("%20", " ")).collect()
 }
 
-pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, wait: bool) -> Result<(), Error> {
+pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, wait: bool, workDir: Option<String>) -> Result<(), Error> {
+    if workDir.is_some() {
+        env::set_current_dir(Path::new(&workDir.unwrap()))?;
+    } 
+
     let mut cmd = Command::new(command);
     for i in args {
         cmd.args(i);
