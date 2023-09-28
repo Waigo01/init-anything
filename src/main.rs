@@ -132,7 +132,7 @@ fn main() {
         }
     } else if args.len() > 2 && args[1] == "run" {
         if fs::read_dir("./").unwrap().map(|x| x.unwrap().path()).collect::<Vec<PathBuf>>().contains(&Path::new("./").join("init-anything.json")) {
-            let config: Config = if let Ok(s) = serde_json::from_str(&fs::read_to_string("./init-anything.json").unwrap()) { s } else { println!("\x1b[1;31mAn error occured while passing the json\x1b[0m"); return;};
+            let config: Config = match serde_json::from_str(&fs::read_to_string("./init-anything.json").unwrap()) { Ok(s) => s, Err(e) => { println!("\x1b[1;31mAn error occured while passing the json: {}\x1b[0m", e); return;}};
             match runCmd(config, flags, args) {
                 Ok(_) => println!("\x1b[1;32mRunning Command\x1b[0m"),
                 Err(e) => { println!("{}", e.message); return;},
