@@ -27,6 +27,7 @@ pub struct CommandString {
 #[derive(Serialize, Deserialize)]
 pub struct RunCommand {
     pub name: String,
+    pub runAsync: Option<bool>,
     pub commands: Vec<CommandString>,
 }
 

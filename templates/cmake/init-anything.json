@@ -1,5 +1,5 @@
 {
-  "name": "cmake",
+  "name": "Cmake",
   "runCommands": [
     {"name": "start", "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]}
   ],

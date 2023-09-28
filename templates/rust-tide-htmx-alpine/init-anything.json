@@ -3,6 +3,7 @@
   "runCommands": [
     {
       "name": "dev",
+      "runAsync": true,
       "commands": [{"command": "live-server --port=$port0 --watch=./,../static --mount=/static:./static --proxy=/api/:http://127.0.0.1:$port1/api/ ./pages"}, {"command": "cargo watch --ignore \"static\" --ignore \"pages\" -x run%20$port1"}]
     }
   ],

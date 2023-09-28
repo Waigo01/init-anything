@@ -6,6 +6,7 @@ pub fn runCmd(config: Config, ownFlags: Vec<String>, ownArgs: Vec<String>) -> Re
         for i in commands {
             if i.name == ownArgs[2] {
                 let mut count = 0;
+                let runAsync = i.runAsync.is_some() && i.runAsync.unwrap();
                 for j in &i.commands {
                     let mut command = j.command.clone();
                     if config.vars.is_some() && config.vars.as_ref().unwrap().len() > 0 {
@@ -18,7 +19,7 @@ pub fn runCmd(config: Config, ownFlags: Vec<String>, ownArgs: Vec<String>) -> Re
                     if count == i.commands.len()-1 {
                         executeCommand(&args[0], &vec![args[1..].to_vec()], &vec!["-v".to_string()], true, j.execDir.clone())?;
                     } else {
-                        executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, false, j.execDir.clone())?;
+                        executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, !runAsync, j.execDir.clone())?;
                     }
                     count += 1;
                 }
