@@ -33,16 +33,16 @@ Flags:
 ```json
 {
   "name": "",
-  ("runCommands"): [
+  "(runCommands)": [
     {
       "name": "",
-      ("vars"): [{"name": "", ("default"): ""}],
+      "(vars)": [{"name": "", "(default)": ""}],
       "commands": [""]
     }
   ],
-  ("initCommands"): [""],
-  ("forceInitVerbose"): true,
-  ("addDeps"): [{"command": "", "deps": [""]}]
+  "(initCommands)": [""],
+  "(forceInitVerbose)": true,
+  "(addDeps)": [{"command": "", "deps": [""]}]
 }
 ```
 
