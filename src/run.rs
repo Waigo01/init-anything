@@ -1,4 +1,4 @@
-use crate::{Config, errors::RunError, RunCommand, getCommandArgs, executeCommand, replaceVars};
+use crate::{Config, errors::RunError, RunCommand, helpers::{getCommandArgs, executeCommand, replaceVars}};
 
 pub fn runCmd(config: Config, ownFlags: Vec<String>, ownArgs: Vec<String>) -> Result<(), RunError> {
     if config.runCommands.is_some() && config.runCommands.as_ref().unwrap().len() > 0 {

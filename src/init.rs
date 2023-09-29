@@ -1,6 +1,6 @@
 use std::{fs, path::{PathBuf, Path}};
 
-use crate::{errors::InitError, Template, getCommandArgs, executeCommand, replaceVars};
+use crate::{errors::InitError, Template, helpers::{getCommandArgs, executeCommand, replaceVars}};
 
 pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), InitError> {
     let config = template.config;
