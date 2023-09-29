@@ -15,6 +15,7 @@ mod helpers;
 #[derive(Serialize, Deserialize)]
 pub struct Var {
     pub name: String,
+    pub reqFor: Option<String>,
     pub default: Option<String>
 }
 
@@ -95,6 +96,6 @@ fn main() {
             return;
         }
     } else {
-        println!("Usage: init-anything [init | run] <run-command>\n\nFlags:\n\t-v: verbose output\n\t--<variable for run-command>=<value>");
+        println!("Usage: init-anything [init | run] <run-command>\n\nFlags:\n\t-v: verbose output\n\t--<variable>=<value>");
     }
 }

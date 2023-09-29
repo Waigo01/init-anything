@@ -14,13 +14,13 @@ pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), Ini
                 }
             }
             let args: Vec<String> = getCommandArgs(&command);
-            executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, true, None)?;
+            executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, false, None)?;
         }
     }
     for i in fs::read_dir(template.path)? {
         let entry = i?.path();
         let args = vec!["-r".to_string(), entry.to_str().unwrap().to_string(), "./".to_string()];
-        executeCommand(&"cp".to_string(), &vec![args], &ownFlags, true, None)?;
+        executeCommand(&"cp".to_string(), &vec![args], &ownFlags, false, None)?;
     }
     if config.varFiles.is_some() && config.varFiles.as_ref().unwrap().len() > 0 {
         for i in config.varFiles.unwrap() {
@@ -37,7 +37,7 @@ pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), Ini
             let args: Vec<String> = getCommandArgs(&i.command);
             for j in i.deps {
                 let addArgs: Vec<String> = getCommandArgs(&j);
-                executeCommand(&args[0], &vec![args[1..].to_vec(), addArgs], &ownFlags, true, None)?;
+                executeCommand(&args[0], &vec![args[1..].to_vec(), addArgs], &ownFlags, false, None)?;
             }
         }
     }

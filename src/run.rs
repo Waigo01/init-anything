@@ -17,9 +17,9 @@ pub fn runCmd(config: Config, ownFlags: Vec<String>, ownArgs: Vec<String>) -> Re
                     }
                     let args = getCommandArgs(&command.to_string());
                     if count == i.commands.len()-1 {
-                        executeCommand(&args[0], &vec![args[1..].to_vec()], &vec!["-v".to_string()], true, j.execDir.clone())?;
+                        match executeCommand(&args[0], &vec![args[1..].to_vec()], &vec!["-v".to_string()], false, j.execDir.clone()) { Ok(_) => {}, Err(e) => {return Err(RunError { message: format!("Error running command {}: {}", e.command, e.message) })}};
                     } else {
-                        executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, !runAsync, j.execDir.clone())?;
+                        match executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, runAsync, j.execDir.clone()) { Ok(_) => {}, Err(e) => {return Err(RunError { message: format!("Error running command {}: {}", e.command, e.message) })}};
                     }
                     count += 1;
                 }

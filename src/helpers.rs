@@ -1,6 +1,6 @@
-use std::{fs, io::Error, env, path::Path, process::{Command, Stdio}};
+use std::{fs, env, path::Path, process::{Command, Stdio}};
 
-use crate::{Template, errors::{LoadError, ReplaceError}, Var};
+use crate::{Template, errors::{LoadError, ReplaceError, commandExecuteError}, Var};
 
 pub fn loadTemplates() -> Result<Vec<Template>, LoadError> {
     let mut configs: Vec<Template> = vec![];
@@ -24,7 +24,7 @@ pub fn getCommandArgs(command: &str) -> Vec<String> {
     command.split(" ").map(|x| x.to_string()).map(|x| x.replace("%20", " ")).collect()
 }
 
-pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, wait: bool, workDir: Option<String>) -> Result<(), Error> {
+pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, runAsync: bool, workDir: Option<String>) -> Result<(), commandExecuteError> {
     if workDir.is_some() {
         env::set_current_dir(Path::new(&workDir.unwrap()))?;
     } 
@@ -39,10 +39,16 @@ pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<
         cmd.stdin(Stdio::inherit()).stdout(Stdio::null()).stderr(Stdio::null());
     }
 
-    if wait {
-        cmd.output()?;
+    if runAsync {
+        match cmd.spawn() {
+            Ok(s) => {},
+            Err(e) => {return Err(commandExecuteError { message: e.to_string(), command: command.to_string() })}
+        };
     } else {
-        cmd.spawn()?;
+        match cmd.output() {
+            Ok(s) => {},
+            Err(e) => {return Err(commandExecuteError { message: e.to_string(), command: command.to_string() })}
+        };
     }
 
     Ok(())

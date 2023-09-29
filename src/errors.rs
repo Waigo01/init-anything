@@ -82,3 +82,17 @@ impl From<serde_json::Error> for ReplaceError {
         }
     }
 }
+
+pub struct commandExecuteError {
+    pub message: String,
+    pub command: String
+}
+
+impl From<io::Error> for commandExecuteError {
+    fn from(error: io::Error) -> Self {
+        commandExecuteError {
+            message: error.to_string(),
+            command: "".to_string(),
+        }
+    }
+}
