@@ -33,18 +33,18 @@ Flags:
 ```json
 {
   "name": "",
-  ("runCommands"): [
+  "(runCommands)": [
     {
       "name": "",
-      ("runAsync"): true | false,
-      "commands": [{"name": "", ("execDir"): ""}]
+      "(runAsync)": true | false,
+      "commands": [{"name": "", "(execDir)": ""}]
     }
   ],
-  ("initCommands"): [""],
-  ("forceInitVerbose"): true,
-  ("addDeps"): [{"command": "", "deps": [""]}],
-  ("vars"): [{"name": "", ("default"): ""}],
-  ("varFiles"): [""]
+  "(initCommands)": [""],
+  "(forceInitVerbose)": true,
+  "(addDeps)": [{"command": "", "deps": [""]}],
+  "(vars)": [{"name": "", "(default)": ""}],
+  "(varFiles)": [""]
 }
 ```
 
@@ -82,7 +82,7 @@ Here is the second example template which initializes a simple environment for d
 }
 ```
 
-You can again see the "name" and "initCommands" fields but there are also a lot more fields. The "addDeps" field is a field with which you can specify what dependencies to add and how you would like to add them. You can also see the "forceInitVerbose" field. This field will force the use of the "-v"-flag when initializing a project when set to true. Also, there is the "runCommands" field. This field specifies any commands you would like to run with one simple usage of the command init-anything. Each command in the list must have a command assigned to it. The filed "runAsync" is also optional and will run the commands in order but asynchronously. The "vars" field contains variables that can be set using the flag --<variable>=<value> when executing the run or init command. It can be referenced using the $variable shorthand in any init or run command.
+You can again see the "name" and "initCommands" fields but there are also a lot more fields. The "addDeps" field is a field with which you can specify what dependencies to add and how you would like to add them. You can also see the "forceInitVerbose" field. This field will force the use of the "-v"-flag when initializing a project when set to true. Also, there is the "runCommands" field. This field specifies any commands you would like to run with one simple usage of the command init-anything. Each command in the list must have a command assigned to it. The filed "runAsync" is also optional and will run the commands in order but asynchronously. The "vars" field contains variables that can be set using the flag --<variable>=<value> when executing the run or init command. It can be referenced using the $variable shorthand in any init or run command. If no default is given the flag for setting the variable is required. Another little quirk you will find is the "%20" string in the cargo watch command. The "%20" shorthand prevents the splitting up of the command at this position into different arguments. This is useful and required in this case as cargo watch wants the run command and its arguments to be one argument to the cargo watch command. The "%20" gets replaced with " " after splitting up of the command into its different arguments.
 
 The command "dev" can be run like this:
 
@@ -91,20 +91,23 @@ init-anything run dev --port0=8080 --port1=8081
 
 ```
 
-Finally, you can find one last config looking like this:
+Finally, you can find one last config:
 
 ```json
 {
   "name": "Cmake",
   "runCommands": [
-    {"name": "start", "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]}
+    {
+      "name": "start",
+      "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]
+    }
   ],
   "varFiles": ["./CMakeLists.txt"],
   "vars": [{"name": "projectName", "default": "HelloWorld"}]
 }
 ```
 
-This config initializes a simple Cmake prject. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. The rest of the config should look familiar.
+This config initializes a simple Cmake project. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. It also showcases the "execDir" field. This field can be added to any command in the runCommands.commands section. As it is not currently possible to execute a cd command in rust, this field can be used to change the directory in which the command is run. Please note that the execDir carries over to the next commands. If you for example want to change the execution directory back to the root directory after executing cmake you would have to set the execDir to be "../" on the next command. The rest of the config should look familiar.
 
 The project can be initialized using the following command, when not using the default project name:
 
