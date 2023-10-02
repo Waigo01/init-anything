@@ -8,7 +8,7 @@ pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), Ini
         for i in config.initCommands.unwrap() {
             let mut command = i.clone();
             if config.vars.is_some() && config.vars.as_ref().unwrap().len() > 0 {
-                match replaceVars(command.to_string(), config.vars.as_ref().unwrap(), &ownFlags) {
+                match replaceVars(command.to_string(), config.vars.as_ref().unwrap(), &ownFlags, "init".to_string()) {
                     Ok(s) => command = s,
                     Err(e) => return Err(InitError { message: e.message }),
                 }
@@ -25,7 +25,7 @@ pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), Ini
     if config.varFiles.is_some() && config.varFiles.as_ref().unwrap().len() > 0 {
         for i in config.varFiles.unwrap() {
             if fs::read_dir("./").unwrap().map(|x| x.unwrap().path()).collect::<Vec<PathBuf>>().contains(&Path::new(&i).into()) {
-                fs::write(i.clone(), match &replaceVars(fs::read_to_string(i.clone()).unwrap(), &config.vars.as_ref().unwrap(), &ownFlags) {
+                fs::write(i.clone(), match &replaceVars(fs::read_to_string(i.clone()).unwrap(), &config.vars.as_ref().unwrap(), &ownFlags, "init".to_string()) {
                     Ok(s) => s,
                     Err(e) => return Err(InitError {message: e.message.clone()}),
                 })?;

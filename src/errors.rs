@@ -43,6 +43,12 @@ impl From<serde_json::Error> for InitError {
     } 
 }
 
+impl From<CommandExecuteError> for InitError {
+    fn from(error: CommandExecuteError) -> Self {
+        InitError { message: format!("Error executing command {}: {}", error.command, error.message) }
+    }
+}
+
 pub struct RunError {
     pub message: String,
 }
@@ -83,16 +89,20 @@ impl From<serde_json::Error> for ReplaceError {
     }
 }
 
-pub struct commandExecuteError {
+pub struct CommandExecuteError {
     pub message: String,
     pub command: String
 }
 
-impl From<io::Error> for commandExecuteError {
+impl From<io::Error> for CommandExecuteError {
     fn from(error: io::Error) -> Self {
-        commandExecuteError {
+        CommandExecuteError {
             message: error.to_string(),
             command: "".to_string(),
         }
     }
+}
+
+pub struct ValidationError {
+    pub message: String,
 }

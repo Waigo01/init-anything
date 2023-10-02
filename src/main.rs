@@ -12,33 +12,33 @@ mod errors;
 mod run;
 mod helpers;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Var {
     pub name: String,
     pub reqFor: Option<String>,
     pub default: Option<String>
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CommandString {
     pub command: String,
     pub execDir: Option<String>
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct RunCommand {
     pub name: String,
     pub runAsync: Option<bool>,
     pub commands: Vec<CommandString>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct DependencyAdd {
     pub command: String,
     pub deps: Vec<String>
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct Config {
     pub name: String,
     pub runCommands: Option<Vec<RunCommand>>,

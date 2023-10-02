@@ -1,6 +1,32 @@
 use std::{fs, env, path::Path, process::{Command, Stdio}};
 
-use crate::{Template, errors::{LoadError, ReplaceError, commandExecuteError}, Var};
+use crate::{Template, errors::{LoadError, ReplaceError, CommandExecuteError, ValidationError}, Var, Config};
+
+pub fn validateConfig(config: Config) -> Result<(), ValidationError> {
+    if config.vars.is_some() {
+        let mut commands: Vec<String> = vec!["init".to_string()];
+        if config.runCommands.is_some() {
+            for i in config.runCommands.unwrap() {
+                for j in i.commands {
+                    commands.push(j.command);
+                }
+            }
+        }
+        for i in &config.vars.unwrap() {
+            if i.reqFor.is_some() && i.reqFor.as_ref().unwrap() != "" { 
+                for j in i.reqFor.as_ref().unwrap().split(",").map(|x| x.to_string()).collect::<Vec<String>>() {
+                    if !commands.contains(&j) {
+                        return Err(ValidationError { message: format!("No command {} found in config!", j)});
+                    } 
+                }
+            }
+        }
+    }else{
+        return Ok(());
+    }
+
+    Ok(())
+}
 
 pub fn loadTemplates() -> Result<Vec<Template>, LoadError> {
     let mut configs: Vec<Template> = vec![];
@@ -9,8 +35,11 @@ pub fn loadTemplates() -> Result<Vec<Template>, LoadError> {
         if !entry.join("init-anything.json").exists() {
             continue;
         }
-        match serde_json::from_str(&fs::read_to_string(entry.join("init-anything.json"))?) {
-            Ok(s) => configs.push(Template {config: s, path: entry}),
+        match serde_json::from_str::<Config>(&fs::read_to_string(entry.join("init-anything.json"))?) {
+            Ok(s) => match validateConfig(s.clone()) {
+                Ok(_) => {configs.push(Template {config: s, path: entry.clone()})},
+                Err(x) => return Err(LoadError { message: x.message, configPath: Some(entry.join("init-anything.json").to_str().unwrap().to_string()) })
+            },     
             Err(e) => return Err(LoadError { message: e.to_string(), configPath: Some(entry.join("init-anything.json").to_str().unwrap().to_string()) })
         }
     }
@@ -24,7 +53,7 @@ pub fn getCommandArgs(command: &str) -> Vec<String> {
     command.split(" ").map(|x| x.to_string()).map(|x| x.replace("%20", " ")).collect()
 }
 
-pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, runAsync: bool, workDir: Option<String>) -> Result<(), commandExecuteError> {
+pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, runAsync: bool, workDir: Option<String>) -> Result<(), CommandExecuteError> {
     if workDir.is_some() {
         env::set_current_dir(Path::new(&workDir.unwrap()))?;
     } 
@@ -41,22 +70,25 @@ pub fn executeCommand(command: &String, args: &Vec<Vec<String>>, ownFlags: &Vec<
 
     if runAsync {
         match cmd.spawn() {
-            Ok(s) => {},
-            Err(e) => {return Err(commandExecuteError { message: e.to_string(), command: command.to_string() })}
+            Ok(_) => {},
+            Err(e) => {return Err(CommandExecuteError { message: e.to_string(), command: command.to_string() })}
         };
     } else {
         match cmd.output() {
-            Ok(s) => {},
-            Err(e) => {return Err(commandExecuteError { message: e.to_string(), command: command.to_string() })}
+            Ok(_) => {},
+            Err(e) => {return Err(CommandExecuteError { message: e.to_string(), command: command.to_string() })}
         };
     }
 
     Ok(())
 }
 
-pub fn replaceVars(replaceString: String, vars: &Vec<Var>, ownFlags: &Vec<String>) -> Result<String, ReplaceError> {
+pub fn replaceVars(replaceString: String, vars: &Vec<Var>, ownFlags: &Vec<String>, currentCommand: String) -> Result<String, ReplaceError> {
     let mut builtReplaceString = replaceString;
     for i in vars {
+        if i.reqFor.is_some() && !i.reqFor.clone().unwrap().split(",").collect::<String>().contains(&currentCommand) {
+            continue;
+        }
         let mut found = false;
         for j in ownFlags {
             if i.name == j.trim_matches('-').split("=").collect::<Vec<&str>>()[0] {

@@ -10,7 +10,7 @@ pub fn runCmd(config: Config, ownFlags: Vec<String>, ownArgs: Vec<String>) -> Re
                 for j in &i.commands {
                     let mut command = j.command.clone();
                     if config.vars.is_some() && config.vars.as_ref().unwrap().len() > 0 {
-                        match replaceVars(command.to_string(), config.vars.as_ref().unwrap(), &ownFlags) {
+                        match replaceVars(command.to_string(), config.vars.as_ref().unwrap(), &ownFlags, i.name.clone()) {
                             Ok(s) => command = s,
                             Err(e) => return Err(RunError { message: e.message }),
                         }
