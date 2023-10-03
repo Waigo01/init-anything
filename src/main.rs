@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use core::fmt;
 use std::{fs, env::{self}, path::{PathBuf, Path}};
-use helpers::{passFlags, loadTemplates};
+use helpers::{passFlags, loadTemplates, validateConfig};
 use init::initTemplate;
 use inquire::Select;
 use run::runCmd;
@@ -42,7 +42,7 @@ pub struct DependencyAdd {
 pub struct Config {
     pub name: String,
     pub runCommands: Option<Vec<RunCommand>>,
-    pub initCommands: Option<Vec<String>>,
+    pub initCommands: Option<Vec<CommandString>>,
     pub addDeps: Option<Vec<DependencyAdd>>,
     pub vars: Option<Vec<Var>>,
     pub varFiles: Option<Vec<String>>,
@@ -87,9 +87,13 @@ fn main() {
     } else if args.len() > 2 && args[1] == "run" {
         if fs::read_dir("./").unwrap().map(|x| x.unwrap().path()).collect::<Vec<PathBuf>>().contains(&Path::new("./").join("init-anything.json")) {
             let config: Config = match serde_json::from_str(&fs::read_to_string("./init-anything.json").unwrap()) { Ok(s) => s, Err(e) => { println!("\x1b[1;31mAn error occured while passing the json: {}\x1b[0m", e); return;}};
+            match validateConfig(&config) {
+                Ok(_) => {},
+                Err(e) => { println!("\x1b[1;31mError validating config: {}\x1b[0m", e.message); return;},
+            }
             match runCmd(config, flags, args) {
-                Ok(_) => print!(""),
-                Err(e) => { println!("{}", e.message); return;},
+                Ok(_) => {},
+                Err(e) => { println!("\x1b[1;31m{}\x1b[0m", e.message); return;},
             }
         }else{
             println!("\x1b[1;31mCould not find init-anything.json in current directory!\x1b[0m");

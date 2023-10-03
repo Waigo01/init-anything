@@ -7,5 +7,5 @@
     }
   ],
   "varFiles": ["./CMakeLists.txt"],
-  "vars": [{"name": "projectName", "default": "HelloWorld"}]
+  "vars": [{"name": "projectName", "reqFor": "init, start"}]
 }

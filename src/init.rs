@@ -1,20 +1,26 @@
 use std::{fs, path::{PathBuf, Path}};
 
-use crate::{errors::InitError, Template, helpers::{getCommandArgs, executeCommand, replaceVars}};
+use crate::{errors::InitError, Template, helpers::{getCommandArgs, executeCommand, replaceVars, validateVars}};
 
 pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), InitError> {
     let config = template.config;
+    if config.vars.is_some() && config.vars.as_ref().unwrap().len() > 0 {
+        match validateVars(&config.vars.as_ref().unwrap(), &ownFlags, "init".to_string()) {
+            Ok(_) => {},
+            Err(e) => return Err(InitError { message: e.message }),
+        }
+    }
     if config.initCommands.is_some() {
         for i in config.initCommands.unwrap() {
             let mut command = i.clone();
             if config.vars.is_some() && config.vars.as_ref().unwrap().len() > 0 {
-                match replaceVars(command.to_string(), config.vars.as_ref().unwrap(), &ownFlags, "init".to_string()) {
-                    Ok(s) => command = s,
+                match replaceVars(command.command, &config.vars.as_ref().unwrap(), &ownFlags, "init".to_string()) {
+                    Ok(s) => command.command = s,
                     Err(e) => return Err(InitError { message: e.message }),
                 }
             }
-            let args: Vec<String> = getCommandArgs(&command);
-            executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, false, None)?;
+            let args: Vec<String> = getCommandArgs(&command.command);
+            executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, false, command.execDir)?;
         }
     }
     for i in fs::read_dir(template.path)? {

@@ -36,14 +36,14 @@ Flags:
   "(runCommands)": [
     {
       "name": "",
-      "(runAsync)": true | false,
-      "commands": [{"name": "", "(execDir)": ""}]
+      "(runAsync)": true,
+      "commands": [{"command": "", "(execDir)": ""}]
     }
   ],
-  "(initCommands)": [""],
+  "(initCommands)": [{"command": "", "(execDir)": ""}],
   "(forceInitVerbose)": true,
   "(addDeps)": [{"command": "", "deps": [""]}],
-  "(vars)": [{"name": "", "(default)": ""}],
+  "(vars)": [{"name": "", "(reqFor)": "", "(default)": ""}],
   "(varFiles)": [""]
 }
 ```
@@ -57,7 +57,7 @@ After installation you will find a ".init-anything" directory in your home direc
 ```json
 {
   "name": "Simple Rust",
-  "initCommands": ["cargo init", "git init"]
+  "initCommands": [{"command": "cargo init"}, {"command": "git init"}]
 }
 ```
 
@@ -75,7 +75,7 @@ Here is the second example template which initializes a simple environment for d
       "commands": [{"command": "live-server --port=$port0 --watch=./,../static --mount=/static:./static --proxy=/api/:http://127.0.0.1:$port1/api/ ./pages"}, {"command": "cargo watch --ignore \"static\" --ignore \"pages\" -x run%20$port1"}]
     }
   ],
-  "initCommands": ["cargo init", "git init", "sudo npm install -g live-server"],
+  "initCommands": [{"command": "cargo init"}, {"command": "git init"}, {"command": "sudo npm install -g live-server"}],
   "forceInitVerbose": true,
   "addDeps": [{"command": "cargo add", "deps": ["serde --features=derive", "tide", "serde_json", "async-std --features=attributes", "lazy_static", "tera"]}],
   "vars": [{"name": "port0", "default": "3017"}, {"name": "port1", "default": "3018"}]
@@ -103,11 +103,11 @@ Finally, you can find one last config:
     }
   ],
   "varFiles": ["./CMakeLists.txt"],
-  "vars": [{"name": "projectName", "default": "HelloWorld"}]
+  "vars": [{"name": "projectName", "reqFor": "init, start"}]
 }
 ```
 
-This config initializes a simple Cmake project. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. It also showcases the "execDir" field. This field can be added to any command in the runCommands.commands section. As it is not currently possible to execute a cd command in rust, this field can be used to change the directory in which the command is run. Please note that the execDir carries over to the next commands. If you for example want to change the execution directory back to the root directory after executing cmake you would have to set the execDir to be "../" on the next command. The rest of the config should look familiar.
+This config initializes a simple Cmake project. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. You can also find the "reqFor" field in the variables. This field can be used in order to require that the variable is set for specific commands. If it is left empty the variable is required for all commands if no default is set. If the field is set, it will require the variable only for the set commands. You can specify commands using their name and the init commands using "init". It also showcases the "execDir" field. This field can be added to any command in the runCommands.commands section. As it is not currently possible to execute a cd command in rust, this field can be used to change the directory in which the command is run. Please note that the execDir carries over to the next commands. If you for example want to change the execution directory back to the root directory after executing cmake you would have to set the execDir to be "../" on the next command. The rest of the config should look familiar.
 
 The project can be initialized using the following command, when not using the default project name:
 

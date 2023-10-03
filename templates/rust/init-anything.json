@@ -1,4 +1,4 @@
 {
   "name": "Simple Rust",
-  "initCommands": ["cargo init", "git init"]
+  "initCommands": [{"command": "cargo init"}, {"command": "git init"}]
 }
