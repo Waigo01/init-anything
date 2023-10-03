@@ -25,7 +25,7 @@ init-anything [init | run] <run-command>
 
 Flags:
     -v: verbose output
-    --<veriable for run-command>=<value>
+    --<variable>=<value>
 ```
 
 ### Config File Usage:
