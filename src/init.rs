@@ -10,6 +10,11 @@ pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), Ini
             Err(e) => return Err(InitError { message: e.message }),
         }
     }
+    for i in fs::read_dir(template.path)? {
+        let entry = i?.path();
+        let args = vec!["-r".to_string(), entry.to_str().unwrap().to_string(), "./".to_string()];
+        executeCommand(&"cp".to_string(), &vec![args], &ownFlags, false, None)?;
+    }
     if config.initCommands.is_some() {
         for i in config.initCommands.unwrap() {
             let mut command = i.clone();
@@ -22,11 +27,6 @@ pub fn initTemplate(template: Template, ownFlags: Vec<String>) -> Result<(), Ini
             let args: Vec<String> = getCommandArgs(&command.command);
             executeCommand(&args[0], &vec![args[1..].to_vec()], &ownFlags, false, command.execDir)?;
         }
-    }
-    for i in fs::read_dir(template.path)? {
-        let entry = i?.path();
-        let args = vec!["-r".to_string(), entry.to_str().unwrap().to_string(), "./".to_string()];
-        executeCommand(&"cp".to_string(), &vec![args], &ownFlags, false, None)?;
     }
     if config.varFiles.is_some() && config.varFiles.as_ref().unwrap().len() > 0 {
         for i in config.varFiles.unwrap() {
