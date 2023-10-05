@@ -88,7 +88,6 @@ The command "dev" can be run like this:
 
 ```
 init-anything run dev --port0=8080 --port1=8081
-
 ```
 
 Finally, you can find one last config:
