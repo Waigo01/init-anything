@@ -10,5 +10,5 @@
   "initCommands": [{"command": "cargo init"}, {"command": "git init"}, {"command": "sudo npm install -g live-server"}],
   "forceInitVerbose": true,
   "addDeps": [{"command": "cargo add", "deps": ["serde --features=derive", "tide", "serde_json", "async-std --features=attributes", "lazy_static", "tera"]}],
-  "vars": [{"name": "port0", "default": "3017"}, {"name": "port1", "default": "3018"}]
+  "vars": [{"name": "port0", "default": "3030"}, {"name": "port1", "default": "3031"}]
 }

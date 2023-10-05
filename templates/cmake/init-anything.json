@@ -3,7 +3,7 @@
   "runCommands": [
     {
       "name": "start",
-      "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]
+      "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make", "execDir": "./build"}, {"command": "./$projectName", "execDir": "./build"}]
     }
   ],
   "varFiles": ["./CMakeLists.txt"],
