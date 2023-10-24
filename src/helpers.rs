@@ -72,6 +72,7 @@ pub fn getCommandArgs(command: &str) -> Vec<String> {
 }
 
 pub fn executeCommand(command: &str, args: &Vec<Vec<String>>, ownFlags: &Vec<String>, runAsync: bool, workDir: Option<String>) -> Result<(), CommandExecuteError> {
+    let currentWorkDir = env::current_dir()?;
     if workDir.is_some() {
         env::set_current_dir(Path::new(&workDir.unwrap()))?;
     } 
@@ -97,6 +98,8 @@ pub fn executeCommand(command: &str, args: &Vec<Vec<String>>, ownFlags: &Vec<Str
             Err(e) => { return Err(CommandExecuteError { message: e.to_string(), command: command.to_string() })}
         };
     }
+
+    env::set_current_dir(currentWorkDir)?;
 
     Ok(())
 }

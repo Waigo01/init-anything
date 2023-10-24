@@ -61,7 +61,7 @@ After installation you will find a ".init-anything" directory in your home direc
 }
 ```
 
-The field "name" is the only required field. This is the name shown to the user when trying to initialize a project. The field "initCommands" is a simple list of commands that are run when initializing the project. **It may be important to know that init-anything first runs the init-commands then copies the files and directories in the template path and then adds any dependencies that may be specified in the "addDeps" section of the config.**
+The field "name" is the only required field. This is the name shown to the user when trying to initialize a project. The field "initCommands" is a simple list of commands that are run when initializing the project. **It may be important to know that init-anything first copies the files and directories in the template path, then runs the init-commands and then adds any dependencies that may be specified in the "addDeps" section of the config.**
 
 Here is the second example template which initializes a simple environment for developing and running a webserver using tide and using htmx and alpinejs on the frontend. Its config looks like this:
 
@@ -88,7 +88,6 @@ The command "dev" can be run like this:
 
 ```
 init-anything run dev --port0=8080 --port1=8081
-
 ```
 
 Finally, you can find one last config:
@@ -99,7 +98,7 @@ Finally, you can find one last config:
   "runCommands": [
     {
       "name": "start",
-      "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make"}, {"command": "./$projectName"}]
+      "commands": [{"command": "cmake ..", "execDir": "./build"}, {"command": "make", "execDir": "./build"}, {"command": "./$projectName", "execDir": "./build"}]
     }
   ],
   "varFiles": ["./CMakeLists.txt"],
@@ -107,7 +106,7 @@ Finally, you can find one last config:
 }
 ```
 
-This config initializes a simple Cmake project. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. You can also find the "reqFor" field in the variables. This field can be used in order to require that the variable is set for specific commands. If it is left empty the variable is required for all commands if no default is set. If the field is set, it will require the variable only for the set commands. You can specify commands using their name and the init commands using "init". It also showcases the "execDir" field. This field can be added to any command in the runCommands.commands section. As it is not currently possible to execute a cd command in rust, this field can be used to change the directory in which the command is run. Please note that the execDir carries over to the next commands. If you for example want to change the execution directory back to the root directory after executing cmake you would have to set the execDir to be "../" on the next command. The rest of the config should look familiar.
+This config initializes a simple Cmake project. This config showcases the abbility to set variables in certain files using the "varFiles" field. This will replace any variables in the files using the $variable shorthand at init time. You can also find the "reqFor" field in the variables. This field can be used in order to require that the variable is set for specific commands. If it is left empty the variable is required for all commands if no default is set. If the field is set, it will require the variable only for the set commands. You can specify commands using their name and the init commands using "init". It also showcases the "execDir" field. This field can be added to any command in the runCommands.commands section. As it is not currently possible to execute a cd command in rust, this field can be used to change the directory in which the command is run. The rest of the config should look familiar.
 
 The project can be initialized using the following command, when not using the default project name:
 
