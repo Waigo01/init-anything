@@ -6,6 +6,8 @@ init-anything is a simple init and task cli-tool written in rust. It can create 
 
 ## Installation:
 
+**init-anything only works on linux**
+
 Just download the git repo and use make:
 
 
